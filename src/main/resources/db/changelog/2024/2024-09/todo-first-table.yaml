@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: todo-first-table
+      author: Oleh Onyshchuk
+      changes:
+        - createTable:
+            tableName: todo_list_table
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
