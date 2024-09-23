@@ -4,7 +4,7 @@ databaseChangeLog:
       author: Oleh Onyshchuk
       changes:
         - createTable:
-            tableName: todo_list_table
+            tableName: todo_list_tasks
             columns:
               - column:
                   name: id
@@ -13,7 +13,13 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
               - column:
-                  name: name
+                  name: task
                   type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: completed
+                  type: boolean
+                  defaultValueBoolean: false
                   constraints:
                     nullable: false
