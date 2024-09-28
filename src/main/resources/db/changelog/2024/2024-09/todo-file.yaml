@@ -1,0 +1,42 @@
+databaseChangeLog:
+  - changeSet:
+      id: todo-file-table
+      author: Oleh Onyshchuk
+      changes:
+        - createTable:
+            tableName: todo_tasks_file
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: path
+                  type: varchar(1024)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: file_uuid
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: content_type
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: size
+                  type: bigint
+                  constraints:
+                    nullable: false
+        - addUniqueConstraint:
+            tableName: todo_tasks_file
+            columnNames: path, file_uuid

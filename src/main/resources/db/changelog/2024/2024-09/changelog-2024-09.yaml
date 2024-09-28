@@ -1,4 +1,7 @@
 databaseChangeLog:
   - include:
       relativeToChangelogFile: true
-      file: todo-first-table.yaml
+      file: todo-task.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: todo-file.yaml

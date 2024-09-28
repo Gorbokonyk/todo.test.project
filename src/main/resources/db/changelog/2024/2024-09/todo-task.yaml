@@ -1,6 +1,6 @@
 databaseChangeLog:
   - changeSet:
-      id: todo-first-table
+      id: todo-task-table
       author: Oleh Onyshchuk
       changes:
         - createTable:
