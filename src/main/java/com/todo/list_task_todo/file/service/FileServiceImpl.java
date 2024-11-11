@@ -11,7 +11,6 @@ import org.springframework.util.StringUtils;
 import com.todo.list_task_todo.file.dto.FileDto;
 import com.todo.list_task_todo.file.dto.FileUploadResponse;
 import com.todo.list_task_todo.file.dto.UploadFileDto;
-import com.todo.list_task_todo.file.dto.UploadResponse;
 import com.todo.list_task_todo.file.exception.InvalidFileNameException;
 import com.todo.list_task_todo.file.mapper.FileMapper;
 import com.todo.list_task_todo.file.model.FileEntity;
@@ -41,13 +40,10 @@ public class FileServiceImpl implements FileService {
         .contentType(uploadFile.getContentType())
         .size(uploadFile.getSize())
         .build();
+
     final FileDto fileDto = fileMapper.toFileDto(fileEntity);
-    try (final InputStream inputStream = uploadFile.getInputStream()) {
-      final UploadResponse uploadResponse = storage.upload(fileDto, inputStream);
-    } catch (final IOException | RuntimeException e) {
-      e.getMessage();
-      throw e;
-    }
+    final InputStream inputStream = uploadFile.getInputStream();
+    storage.upload(fileDto, inputStream);
     fileEntity = fileRepository.save(fileEntity);
     return fileMapper.toStoreFileResponse(fileEntity);
   }
