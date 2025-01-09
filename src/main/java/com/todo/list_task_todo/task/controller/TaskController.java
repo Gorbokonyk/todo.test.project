@@ -43,8 +43,8 @@ public class TaskController {
 
 
   @PatchMapping("/{id}")
-  public TaskPatchResponse patch(@PathVariable final long id) {
-    return taskService.patch(id);
+  public TaskPatchResponse patchCompleted(@PathVariable final long id) {
+    return taskService.patchCompleted(id);
   }
 
   @DeleteMapping("/{id}")
