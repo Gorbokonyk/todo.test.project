@@ -15,7 +15,7 @@ public class TaskListResponse {
   @Data
   public static class Task {
     private Long id;
-    private String task;
+    private String title;
     private Boolean completed;
   }
 }

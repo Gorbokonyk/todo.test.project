@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class TaskCreateRequest {
-  private String task;
+  private String title;
   private boolean completed;
 }

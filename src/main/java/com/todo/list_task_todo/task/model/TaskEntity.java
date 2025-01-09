@@ -21,9 +21,9 @@ public class TaskEntity {
   @ToString.Include
   private Long id;
 
-  @Column(name = "task")
+  @Column(name = "title")
   @ToString.Include
-  private String task;
+  private String title;
 
   @Column(name = "completed")
   @ToString.Include

@@ -24,6 +24,7 @@ public class TaskService {
   public TaskListResponse list() {
     final List<TaskEntity> all = taskRepository.findAll();
     final List<TaskListResponse.Task> list = all.stream().map(mapper::toListResponseItem).toList();
+    System.out.println("Tasks: " + list);
     return TaskListResponse.builder().data(list).build();
   }
 
@@ -41,7 +42,12 @@ public class TaskService {
     return mapper.toCreateResponse(printerEntity);
   }
 
-  public TaskPatchResponse patch(final long id) {
+  public void createTask(final TaskCreateRequest taskCreateRequest) {
+    final TaskEntity printerEntity = mapper.fromCreateRequest(taskCreateRequest);
+    taskRepository.save(printerEntity);
+  }
+
+  public TaskPatchResponse patchCompleted(final long id) {
     TaskEntity taskEntity = taskRepository.findById(id).orElseThrow(TaskNotFoundException::new);
     taskEntity.setCompleted(true);
     taskRepository.save(taskEntity);
