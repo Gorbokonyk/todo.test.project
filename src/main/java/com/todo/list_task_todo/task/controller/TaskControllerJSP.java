@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.todo.list_task_todo.task.dto.TaskCreateRequest;
 import com.todo.list_task_todo.task.dto.TaskListResponse;
+import com.todo.list_task_todo.task.dto.TaskUpdateRequest;
 import com.todo.list_task_todo.task.service.TaskService;
 import lombok.RequiredArgsConstructor;
 
@@ -53,15 +54,19 @@ public class TaskControllerJSP {
     return "redirect:/api/v2/task";
   }
 
-//  @PostMapping("/{id}")
-//  public String update(@PathVariable final long id, RedirectAttributes redirectAttributes) {
-//    if (taskService.patchCompleted(id).getCompleted()){
-//      redirectAttributes.addFlashAttribute("message", "Task not completed");
-//      return "redirect:/ViewToDoList";
-//    }
-//    redirectAttributes.addFlashAttribute("message", "Task completed");
-//    return "redirect:/ViewToDoList";
-//  }
+  @GetMapping("/editToDoItem/{id}")
+  public String edit(@PathVariable long id, Model model) {
+    model.addAttribute("task", taskService.get(id));
+    return "EditToDoItem";
+  }
+
+  @PostMapping("edit/{taskId}")
+  public String update(@PathVariable final long taskId, final TaskUpdateRequest taskUpdateRequest,
+                       RedirectAttributes redirectAttributes) {
+    taskService.update(taskId, taskUpdateRequest);
+    redirectAttributes.addFlashAttribute("message", "Task updated successfully");
+    return "redirect:/api/v2/task";
+  }
 
   @PatchMapping("/{id}")
   public String patchCompleted(@PathVariable final long id, RedirectAttributes redirectAttributes) {

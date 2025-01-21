@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 
 import com.todo.list_task_todo.task.dto.TaskCreateRequest;
 import com.todo.list_task_todo.task.dto.TaskCreateResponse;
+import com.todo.list_task_todo.task.dto.TaskGetResponse;
 import com.todo.list_task_todo.task.dto.TaskListResponse;
 import com.todo.list_task_todo.task.dto.TaskPatchResponse;
+import com.todo.list_task_todo.task.dto.TaskUpdateRequest;
 import com.todo.list_task_todo.task.exception.TaskNotFoundException;
 import com.todo.list_task_todo.task.mapper.DtoMapper;
 import com.todo.list_task_todo.task.model.TaskEntity;
@@ -28,6 +30,11 @@ public class TaskService {
     return TaskListResponse.builder().data(list).build();
   }
 
+  public TaskGetResponse get(Long id) {
+    final TaskEntity task = taskRepository.findById(id).orElseThrow(TaskNotFoundException::new);
+    return mapper.fromGetRequest(task);
+  }
+
   public TaskListResponse listCompleted() {
     final List<TaskListResponse.Task> completedTasks = taskRepository.findAll().stream()
         .filter(TaskEntity::getCompleted)
@@ -45,6 +52,12 @@ public class TaskService {
   public void createTask(final TaskCreateRequest taskCreateRequest) {
     final TaskEntity printerEntity = mapper.fromCreateRequest(taskCreateRequest);
     taskRepository.save(printerEntity);
+  }
+
+  public void update(final long id, TaskUpdateRequest taskUpdateRequest) {
+    TaskEntity taskEntity = taskRepository.findById(id).orElseThrow(TaskNotFoundException::new);
+    taskEntity.setTitle(taskUpdateRequest.getTitle());
+    taskRepository.save(taskEntity);
   }
 
   public TaskPatchResponse patchCompleted(final long id) {

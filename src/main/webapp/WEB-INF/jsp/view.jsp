@@ -21,3 +21,43 @@
             integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </head>
 <base href="/api/v2/task/">
+<body>
+
+<script th:inline="javascript">
+  window.onload = function() {
+
+    var msg = "${message}";
+
+    if (msg == "Save Success") {
+      Command: toastr["success"]("Item added successfully!!")
+    } else if (msg == "Delete Success") {
+      Command: toastr["success"]("Item deleted successfully!!")
+    } else if (msg == "Delete Failure") {
+      Command: toastr["error"]("Some error occurred, couldn't delete item")
+    } else if (msg == "Edit Success") {
+      Command: toastr["success"]("Item updated successfully!!")
+    }
+
+    toastr.options = {
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": true,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": false,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }
+  }
+</script>
+</body>
+
+
+
+
