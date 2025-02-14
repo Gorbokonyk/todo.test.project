@@ -10,12 +10,15 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class FileListResponse {
-  private List<Task> data;
+  private List<FileEntry> data;
 
   @Data
-  public static class Task {
+  public static class FileEntry {
     private Long id;
-    private String task;
-    private Boolean completed;
+    private String path;
+    private String fileUuid;
+    private String name;
+    private String contentType;
+    private long size;
   }
 }
