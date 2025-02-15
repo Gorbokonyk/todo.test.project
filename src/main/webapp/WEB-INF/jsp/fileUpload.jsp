@@ -17,7 +17,7 @@
             <c:if test="${not empty lists}">
             <c:forEach items="${lists}" var="image">
                 <c:url value="/api/v2/task/images/${image.id}" var="imageUrl"/>
-                <img id="photo" src="${imageUrl}" alt="${image.name}" width="200">
+                <img id="photo" src="/api/v2/task/images/${image.id}" alt="${image.name}" width="200">
             </c:forEach>
             </c:if>
         </div>

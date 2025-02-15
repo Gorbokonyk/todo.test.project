@@ -107,18 +107,13 @@ public class TaskControllerJSP {
     model.addAttribute("message", "Upload Success");
     return "fileUpload";
   }
-
-  @GetMapping("/uploads")
-  public String uploads() {
-    return "fileUpload";
-  }
-
+  
 
   @PostMapping("/image")
   @ResponseStatus(code = HttpStatus.CREATED)
   public String upload(@RequestParam("file") final MultipartFile file) {
     fileService.upload(FileHelper.fromMultipartFile(file));
-    return "fileUpload";
+    return "redirect:/api/v2/task/images";
   }
 
   @GetMapping("/images/{id}")

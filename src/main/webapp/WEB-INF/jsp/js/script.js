@@ -59,46 +59,13 @@ function toggleTaskCompletion(id, isChecked) {
   fetch("/api/v2/task/image", {
   method: "POST",
   body: formData
-})
-  .then(response => {
-  return response.json();
-})
-    .then(data => {
-      const imageUrl = data.url || ''; // Assuming the response has the URL or path to the image
-      displayUploadedImage(imageUrl, fileInput.files[0].name);
-      readURL(fileInput);
-    })
-  .catch(error => {
-    document.getElementById("uploadResult").innerHTML = `<div class="alert alert-success">File uploaded successfully! ${JSON.stringify(data)}</div>`;
-});
+}).then(() => window.location.reload());
 }
 
 
-function loadNames() {
-  fetch("/api/v2/task/images",{
-    method:"GET"
-  })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
+function loadImages() {
+ return fetch("/api/v2/task/images")
     .catch(error => console.error("Error loading images:", error));
-
 }
 
-function readURL(input) {
-  if (input.files && input.files[0]) {
-    var reader = new FileReader();
-
-    reader.onload = function (e) {
-      // Display the selected image in an element with ID "photo"
-      document.getElementById('photo').setAttribute('src', e.target.result);
-    };
-    reader.readAsDataURL(input.files[0]);
-  }
-}
-
-
-document.addEventListener("DOMContentLoaded", loadNames);
+document.addEventListener("DOMContentLoaded", loadImages);

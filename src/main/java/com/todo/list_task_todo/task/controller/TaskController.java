@@ -3,7 +3,6 @@ package com.todo.list_task_todo.task.controller;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.todo.list_task_todo.task.dto.TaskCreateRequest;
 import com.todo.list_task_todo.task.dto.TaskCreateResponse;
 import com.todo.list_task_todo.task.dto.TaskListResponse;
-import com.todo.list_task_todo.task.dto.TaskPatchResponse;
 import com.todo.list_task_todo.task.service.TaskService;
 import lombok.RequiredArgsConstructor;
 
@@ -41,11 +39,11 @@ public class TaskController {
     return taskService.create(taskCreateRequest);
   }
 
-
-  @PatchMapping("/{id}")
-  public TaskPatchResponse patchCompleted(@PathVariable final long id) {
-    return taskService.patchCompleted(id);
-  }
+//
+//  @PatchMapping("/{id}")
+//  public TaskPatchResponse patchCompleted(@PathVariable final long id) {
+//    return taskService.patchCompleted(id);
+//  }
 
   @DeleteMapping("/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
